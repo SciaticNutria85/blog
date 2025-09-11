@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.function.Supplier;
 
 @Service
-public class ArticleService implements IUpdate<Article>, ICreate<Article> {
+public class ArticleWritingService implements IUpdate<Article>, ICreate<Article> {
 
     private final ArticleRepository articleRepository;
 
-    public ArticleService(
+    public ArticleWritingService(
             ArticleRepository articleRepository
     ) {
         this.articleRepository = articleRepository;
