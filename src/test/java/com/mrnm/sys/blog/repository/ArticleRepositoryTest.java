@@ -4,7 +4,6 @@ import com.mrnm.sys.blog.documents.Article;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
@@ -12,16 +11,16 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class MongoRepositoryTest {
+class ArticleRepositoryTest {
 
     @Autowired
-    private MongoRepository mongoRepository;
+    private ArticleRepository articleRepository;
 
     private Article article;
 
     @BeforeEach
     void setUp() {
-        mongoRepository.deleteAll(); // limpiar antes de cada test
+        articleRepository.deleteAll(); // limpiar antes de cada test
         article = new Article();
         article.setId("1");
         article.setTitle("Primer artículo");
@@ -32,10 +31,10 @@ class MongoRepositoryTest {
     @Test
     void shouldSaveAndFindArticleById() {
         // Guardar artículo
-        mongoRepository.save(article);
+        articleRepository.save(article);
 
         // Recuperar
-        Optional<Article> found = mongoRepository.findById("1");
+        Optional<Article> found = articleRepository.findById("1");
 
         // Verificaciones
         assertThat(found).isPresent();
@@ -45,10 +44,10 @@ class MongoRepositoryTest {
 
     @Test
     void shouldDeleteArticle() {
-        mongoRepository.save(article);
-        mongoRepository.deleteById("1");
+        articleRepository.save(article);
+        articleRepository.deleteById("1");
 
-        Optional<Article> found = mongoRepository.findById("1");
+        Optional<Article> found = articleRepository.findById("1");
 
         assertThat(found).isEmpty();
     }
@@ -60,10 +59,10 @@ class MongoRepositoryTest {
         another.setTitle("Segundo artículo");
         another.setBody("Contenido extra");
 
-        mongoRepository.save(article);
-        mongoRepository.save(another);
+        articleRepository.save(article);
+        articleRepository.save(another);
 
-        Iterable<Article> all = mongoRepository.findAll();
+        Iterable<Article> all = articleRepository.findAll();
 
         assertThat(all).hasSize(2);
     }

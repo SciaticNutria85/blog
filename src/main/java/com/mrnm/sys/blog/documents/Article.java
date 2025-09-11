@@ -1,10 +1,12 @@
 package com.mrnm.sys.blog.documents;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
 
+@Document(collection = "articles")
 public class Article {
 
     @Id
@@ -78,5 +80,15 @@ public class Article {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Article setArticleValues(Article article) {
+        this.title = article.getTitle();
+        this.body = article.getBody();;
+        this.category = article.getCategory();
+        this.likes = article.getLikes();
+        this.date = new Date();
+        this.tags = article.getTags();
+        return this;
     }
 }

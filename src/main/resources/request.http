@@ -1,0 +1,31 @@
+@base=http://localhost:8080
+
+### Create a new article
+POST {{base}}/articles
+Content-Type: application/json
+
+{
+  "title": "My first article",
+  "body": "This is my first article ever. I am so excited",
+  "category": "backend",
+  "likes": 0,
+  "tags": ["backend", "development", "spring", "java"],
+  "date": "2025-09-11"
+}
+
+
+### Update an article
+PUT {{base}}/articles
+Content-Type: application/json
+
+{
+  "id": "68c28bb28d36a4e9f7bea05e",
+  "title": "My second article",
+  "body": "This is my second article. I am just updating :)",
+  "category": "backend",
+  "likes": 1,
+  "tags": [
+    "backend"
+  ],
+  "date": "2025-09-11T00:00:00.000+00:00"
+}
