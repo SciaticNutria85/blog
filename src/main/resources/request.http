@@ -1,6 +1,6 @@
 @base=http://localhost:8080
 
-### Create a new article
+### Create an article
 POST {{base}}/articles
 Content-Type: application/json
 
@@ -30,8 +30,11 @@ Content-Type: application/json
   "date": "2025-09-11T00:00:00.000+00:00"
 }
 
-### Read an article by its ID
+### Read an article by ID
 GET {{base}}/articles/68c28bb28d36a4e9f7bea05e
 
 ### Read all articles
 GET {{base}}/articles
+
+### Delete article by ID
+DELETE {{base}}/articles/68c28bb28d36a4e9f7bea05e

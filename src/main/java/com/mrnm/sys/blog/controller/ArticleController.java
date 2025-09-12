@@ -3,6 +3,7 @@ package com.mrnm.sys.blog.controller;
 import com.mrnm.sys.blog.commons.ArticleException;
 import com.mrnm.sys.blog.documents.Article;
 import com.mrnm.sys.blog.repository.ArticleRepository;
+import com.mrnm.sys.blog.service.ArticleDeletionService;
 import com.mrnm.sys.blog.service.ArticleReadingService;
 import com.mrnm.sys.blog.service.ArticleWritingService;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,12 @@ public class ArticleController {
 
     private final ArticleReadingService articleReadingService;
 
-    public ArticleController(ArticleWritingService articleWritingService, ArticleReadingService articleReadingService) {
+    private final ArticleDeletionService articleDeletionService;
+
+    public ArticleController(ArticleWritingService articleWritingService, ArticleReadingService articleReadingService, ArticleDeletionService articleDeletionService) {
         this.articleWritingService = articleWritingService;
         this.articleReadingService = articleReadingService;
+        this.articleDeletionService = articleDeletionService;
     }
 
     @PostMapping
@@ -53,4 +57,12 @@ public class ArticleController {
         return ResponseEntity.ok(articles);
     }
 
+
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity<Void> delete(
+            @PathVariable String articleId
+    ) throws ArticleException {
+        articleDeletionService.delete(articleId);
+        return ResponseEntity.ok().build();
+    }
 }
