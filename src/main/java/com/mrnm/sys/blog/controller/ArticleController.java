@@ -3,9 +3,7 @@ package com.mrnm.sys.blog.controller;
 import com.mrnm.sys.blog.commons.ArticleException;
 import com.mrnm.sys.blog.documents.Article;
 import com.mrnm.sys.blog.repository.ArticleRepository;
-import com.mrnm.sys.blog.service.ArticleDeletionService;
-import com.mrnm.sys.blog.service.ArticleReadingService;
-import com.mrnm.sys.blog.service.ArticleWritingService;
+import com.mrnm.sys.blog.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,10 +19,13 @@ public class ArticleController {
 
     private final ArticleDeletionService articleDeletionService;
 
-    public ArticleController(ArticleWritingService articleWritingService, ArticleReadingService articleReadingService, ArticleDeletionService articleDeletionService) {
+    private final ArticleQueryService articleQueryService;
+
+    public ArticleController(ArticleWritingService articleWritingService, ArticleReadingService articleReadingService, ArticleDeletionService articleDeletionService, ArticleQueryService articleQueryService) {
         this.articleWritingService = articleWritingService;
         this.articleReadingService = articleReadingService;
         this.articleDeletionService = articleDeletionService;
+        this.articleQueryService = articleQueryService;
     }
 
     @PostMapping
@@ -64,5 +65,12 @@ public class ArticleController {
     ) throws ArticleException {
         articleDeletionService.delete(articleId);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/query")
+    public ResponseEntity<List<Article>> query(
+                @RequestBody ArticleCriteria articleCriteria
+            ) {
+        return ResponseEntity.ok(articleQueryService.queryObject(articleCriteria));
     }
 }

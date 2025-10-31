@@ -1,0 +1,52 @@
+@base=http://localhost:8080
+
+### Create an article
+POST {{base}}/articles
+Content-Type: application/json
+
+{
+  "title": "My third article",
+  "body": "This an example of my third article about backend development with Spring and Java but this time it was made for SQL.",
+  "category": "backend",
+  "likes": 0,
+  "tags": [],
+  "date": "2025-09-11"
+}
+
+
+### Update an article
+PUT {{base}}/articles
+Content-Type: application/json
+
+{
+  "id": "69044db2f4e8e5e8fdf8b5d9",
+  "title": "My N article",
+  "body": "This is my last testing article, I dunno what to write here anymore.",
+  "category": "backend",
+  "likes": 1,
+  "tags": [
+    "wordpress",
+    "is",
+    "shit"
+  ],
+  "date": "2025-09-11T00:00:00.000+00:00"
+}
+
+### Read an article by ID
+GET {{base}}/articles/68c28bb28d36a4e9f7bea05e
+
+### Read all articles
+GET {{base}}/articles
+
+### Delete article by ID
+DELETE {{base}}/articles/68c28bb28d36a4e9f7bea05e
+
+### Consultar artículos por tags (POST)
+POST http://localhost:8080/articles/query
+Content-Type: application/json
+
+{
+  "date": "2025-09-11",
+  "tags": ["development"]
+}
+

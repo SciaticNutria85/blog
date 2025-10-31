@@ -82,13 +82,12 @@ public class Article {
         this.date = date;
     }
 
-    public Article setArticleValues(Article article) {
+    public void setArticleValues(Article article) {
         this.title = article.getTitle();
         this.body = article.getBody();;
         this.category = article.getCategory();
         this.likes = article.getLikes();
-        this.date = new Date();
         this.tags = article.getTags();
-        return this;
+        this.date = new Date();
     }
 }
